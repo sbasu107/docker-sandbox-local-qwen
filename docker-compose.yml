@@ -1,0 +1,28 @@
+services:
+  qwen-sandbox:
+    image: ollama/ollama:latest
+    container_name: qwen_sandbox
+    # Since your GPU compute isn't supported, we enforce CPU mode
+    environment:
+      - CUDA_VISIBLE_DEVICES=
+    volumes:
+      # This is the magic part! We mount your local models into the container.
+      # The `:ro` at the end means "Read-Only" - the container CANNOT delete or modify your downloaded models!
+      - /usr/share/ollama/.ollama:/root/.ollama:ro
+    ports:
+      - "11434:11434"
+    # Sandbox Security Features:
+    # 1. Drop all elevated Linux capabilities
+    cap_drop:
+      - ALL
+    # 2. Prevent the container from gaining new privileges
+    security_opt:
+      - no-new-privileges:true
+    # 3. Limit RAM to 12 GB (leaves 4 GB for your OS)
+    deploy:
+      resources:
+        limits:
+          memory: 12G
+    # 4. Limit CPU usage (e.g. use max 3.5 cores)
+          cpus: '3.5'
+    restart: unless-stopped
