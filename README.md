@@ -1,6 +1,6 @@
 <p align="center">
   <img src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/97_Docker_logo_logos-512.png" width="100" />
-  <img src="https://qianwen-res.oss-cn-beijing.aliyuncs.com/assets/blog/qwen2.5/qwen2.5.001.png" width="150" />
+  <img src="images/qwen-logo.png" width="100" />
 </p>
 
 # Local AI Agent inside a Docker Sandbox
