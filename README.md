@@ -1,6 +1,6 @@
 <p align="center">
   <img src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/97_Docker_logo_logos-512.png" width="100" />
-  <img src="https://huggingface.co/Qwen/Qwen2.5-3B/resolve/main/assets/logo.jpg" width="100" style="border-radius: 10px;" />
+  <img src="https://qianwen-res.oss-cn-beijing.aliyuncs.com/assets/blog/qwen2.5/qwen2.5.001.png" width="150" />
 </p>
 
 # Local AI Agent inside a Docker Sandbox
@@ -19,14 +19,15 @@ To build a fully functional, safe agent, this project combines three specific te
 
 ```mermaid
 flowchart TD
-    subgraph Host[Host Machine Ubuntu]
+    subgraph Host[Host Machine: Ubuntu]
         subgraph MicroVM[Docker Sandbox MicroVM]
             direction TB
-            Brain[Qwen 2.5 3B Model\nllama-server API: Port 8080]
-            Hands[Open Interpreter\nPython Agent Environment]
-            
-            Hands <-->|Sends Prompts / Receives Code| Brain
-            Hands -->|Executes Code| MicroVM
+            Brain["Qwen 2.5 3B Model\nllama-server — Port 8080"]
+            Hands["Open Interpreter\nPython Agent Environment"]
+            FS["Sandboxed Filesystem\nMounted project folder only"]
+
+            Hands <-->|Sends prompts / receives code| Brain
+            Hands -->|Writes and executes code| FS
         end
     end
 ```
